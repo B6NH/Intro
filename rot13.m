@@ -19,18 +19,6 @@ rot13(Char) =
      else Char
   ).
 
-:- func rot13_2(char) = char.
-
-rot13_2(CharIn) = ( if prot(CharIn, CharOut) then CharOut else CharIn ).
-
-:- pred prot(char::in, char::out) is semidet.
-
-prot('a','n').
-prot('b','o').
-prot('c','p').
-prot('d','q').
-prot('e','r').
-
 :- pred mloop(io::di, io::uo) is det.
 
 mloop(!IO) :-
@@ -39,26 +27,32 @@ mloop(!IO) :-
   io.read_char(Result, !IO),
 
   (
-
      % Show rotated character
      Result = ok(Char),
      io.write_char(rot13_2(Char), !IO),
 
      % Next character
      mloop(!IO)
-
   ;
-
      % Exit
      Result = eof
-
   ;
-
      % Error
      Result = error(ErrorCode),
      io.format("%s\n", [s(io.error_message(ErrorCode))], !IO)
-
   ).
+
+:- func rot13_2(char) = char.
+
+rot13_2(CharIn) = (if prot(CharIn, CharOut) then CharOut else CharIn).
+
+:- pred prot(char::in, char::out) is semidet.
+
+prot('a','n').
+prot('b','o').
+prot('c','p').
+prot('d','q').
+prot('e','r').
 
 main(!IO) :-
   io.format("%s %c\n", [s("A:"), c(rot13('a'))], !IO),
