@@ -9,12 +9,14 @@
 :- implementation.
 :- import_module int, list, string.
 
+% Main predicate
 main(!IO) :-
 
   % Write text
-  io.format("DOG + ANT = CAT\n", [], !IO),
+  format("DOG + ANT = CAT\n", [], !IO),
 
   (
+     % Find solution
      if
 
        % Digits and zero carry
@@ -44,18 +46,17 @@ main(!IO) :-
        CAT = 100 * C + 10 * A + T,
 
        % Show result
-       io.format("%d + %d = %d\n", [i(DOG), i(ANT), i(CAT)], !IO)
+       format("%d + %d = %d\n", [i(DOG), i(ANT), i(CAT)], !IO)
 
      else
 
        % Fail
-       io.format("No solutions\n", [], !IO)
+       format("No solutions\n", [], !IO)
 
   ).
 
-% Pick digit
+% Pick digit nondeterministically
 :- pred pick(list(int)::in, int::out, list(int)::out) is nondet.
-
 pick([X | Xs], X, Xs).
 pick([X | Xs], Y, [X | Zs]) :- pick(Xs, Y, Zs).
 
