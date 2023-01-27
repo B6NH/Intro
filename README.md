@@ -1,5 +1,3 @@
-# Introduction to Mercury
+# Intro-M
 
-Introductions to Mercury:
-* [Mercury Tutorial](Tutorial)
-
+Introduction to Mercury based on Ralph Becket Mercury tutorial
